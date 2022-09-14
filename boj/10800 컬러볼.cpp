@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 #include<algorithm>
 using namespace std;
 
@@ -29,27 +30,58 @@ int main()
 	int testcase;
 	cin >> testcase;
 	Ball* ball = new Ball[testcase];
+	vector<Ball> temp;
 	int k = 0;
+	int s;
 	for (size_t i = 0; i < testcase; i++)
 	{
 		cin >> ball[i].color >> ball[i].size;
 	}
 
+	for (size_t i = 0; i < testcase; i++)
+	{
+		temp.push_back(ball[i]);
+	}
+
 	sort(ball, ball + testcase, compare);
+	for (size_t i = 0; i < testcase; i++)
+	{
+		total += ball[i].size;
+	}
 
 	for (size_t i = 0; i < testcase; i++)
 	{
 		ball[i].total = total;
 
-		if (ball[i].size == ball[k].size || ball[i].color == ball[k].color)
+		for (s = 0; ball[i].size <= ball[s].size ; s++)
 		{
-			ball[i].total -= ball[k].size;
+			ball[i].total -= ball[s].size;
 		}
-		
+		for (s; s < testcase; s++)
+		{
+			if (ball[i].color == ball[s].color)
+			{
+				ball[i].total -= ball[s].size;
+			}
+		}
 	}
 
 	for (size_t i = 0; i < testcase; i++)
 	{
-		cout << ball[i].total << endl;
+		for (size_t s = 0; s < testcase; s++)
+		{
+			if (temp[i].size == ball[s].size)
+			{
+				if (temp[i].color == ball[s].color)
+				{
+					temp[i].total = ball[s].total;
+				}
+			}
+		}
+	}
+
+	for (size_t i = 0; i < testcase; i++)
+	{
+		cout << temp[i].total << endl;
 	}
 }

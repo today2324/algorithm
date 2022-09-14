@@ -1,0 +1,36 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+struct Ball 
+{
+	int size;
+	int color;
+	int total;
+};
+
+bool compare(Ball& a, Ball& b)
+{
+	if (a.size == b.size)
+	{
+		return a.color > b.size;
+	}
+	return a.size > b.size;
+}
+
+int main()
+{
+	int testcase;
+	cin >> testcase;
+	vector<Ball> temp;
+	Ball* ball = new Ball[testcase];
+
+	for (size_t i = 0; i < testcase; i++)
+	{
+		cin >> ball[i].size >> ball[i].color;
+		temp.push_back(ball[i]);
+	}
+
+	sort(ball, ball + testcase, compare);
+
+}

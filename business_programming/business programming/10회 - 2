@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+
+int main() {
+	int Xnum = 0;
+	cin >> Xnum;
+	int* X = new int[Xnum];
+
+	for (size_t i = 0; i < Xnum; i++)
+	{
+		cin >> X[i];
+	}
+
+	for (size_t i = 0; i < Xnum; i++)
+	{
+		int count = 0;
+		while (X[i] != 1)
+		{
+			if ((X[i] % 5) == 0)
+			{
+				X[i] /= 5;
+				count++;
+			}
+			else if ((X[i] % 3) == 0)
+			{
+				X[i] /= 3;
+				count++;
+			}
+			else if ((X[i] % 2) == 0)
+			{
+				X[i] /= 2;
+				count++;
+			}
+			else
+			{
+				X[i]--;
+				count++;
+			}
+		}
+		cout << count << endl;
+	}
+}

@@ -1,0 +1,36 @@
+#include<iostream>
+#include<algorithm>
+using namespace std;
+typedef struct Bus {
+	char color;
+	int colorNumber;
+	int number;
+}Bus;
+Bus* bus;
+
+bool compare(Bus a, Bus b)
+{	
+	if (a.colorNumber == b.colorNumber)
+	{
+		return a.number<  b.number;
+	}
+	return a.colorNumber <b.colorNumber;
+}
+
+int main()
+{
+	int BusNum;
+	cin >> BusNum;
+	bus = new Bus[BusNum];
+	for (size_t i = 0; i < BusNum; i++)
+	{
+		cin >> bus[i].color >> bus[i].number;
+		bus[i].colorNumber = (int)bus[i].color;
+	}
+
+	sort(bus, bus + BusNum, compare); cout << "==============" << endl;
+	for (size_t i = 0; i < BusNum; i++)
+	{
+		cout << bus[i].color << " " << bus[i].number << endl;
+	}
+}
